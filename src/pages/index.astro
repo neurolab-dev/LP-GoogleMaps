@@ -1,0 +1,305 @@
+---
+import Base from '../layouts/Base.astro';
+import Logo from '../components/Logo.astro';
+import Icone from '../components/Icone.astro';
+import { contato } from '../data/contato';
+import { ambiente } from '../data/seo';
+import { maps, mapsFaq, mapsWhatsapp } from '../data/google-maps';
+import '../styles/google-maps.css';
+import '../styles/maps-process.css';
+
+const inicio = 'https://www.neurolab.dev.br/';
+---
+
+<Base titulo={maps.titulo} tituloOg={maps.titulo} descricao={maps.descricao} perguntas={mapsFaq}>
+  <div class="maps-page">
+    <header class="maps-header">
+      <div class="maps-wrap maps-header-inner">
+        <a href={inicio} aria-label={maps.voltar}><Logo formato="completa" largura={132} /></a>
+        <nav aria-label="Navegação da página">
+          <a href="#como-funciona">{maps.navegacao[0]}</a>
+          <a href="#solucao">{maps.navegacao[1]}</a>
+        </nav>
+        <a class="maps-header-contact" href={mapsWhatsapp} aria-label={maps.navegacao[2]} data-contact-location="maps_header" target="_blank" rel="noopener noreferrer">
+          <span>{maps.navegacao[2]}</span><Icone nome="seta-direita" tamanho={20} />
+        </a>
+      </div>
+    </header>
+
+    <main id="conteudo">
+      <section class="maps-hero" aria-labelledby="maps-titulo">
+        <div class="maps-wrap maps-hero-grid">
+          <div class="maps-hero-copy">
+            <p class="maps-eyebrow"><span class="maps-signal"></span>{maps.etiqueta}</p>
+            <h1 id="maps-titulo">{maps.tituloInicio}<br /><span>{maps.tituloDestaque}</span></h1>
+            <p class="maps-lead">{maps.introducao}</p>
+            <a class="maps-cta" href={mapsWhatsapp} data-contact-location="maps_hero" target="_blank" rel="noopener noreferrer">
+              <Icone nome="whatsapp" tamanho={22} /><span>{maps.cta}</span><Icone nome="seta-direita" tamanho={20} />
+            </a>
+            <p class="maps-cta-note">{maps.apoioCta}</p>
+            <a class="maps-text-link" href="#na-pratica">{maps.secundaria}<Icone nome="seta-baixo" tamanho={18} /></a>
+            <ul class="maps-trust-line">{maps.sinais.map(sinal => <li><Icone nome="check" tamanho={18} />{sinal}</li>)}</ul>
+          </div>
+
+          <div class="maps-illustration">
+            <div class="maps-map-window">
+              <div class="maps-search"><Icone nome="busca" tamanho={22} /><span>{maps.mapa.busca}</span><Icone nome="local" tamanho={20} /></div>
+              <div class="maps-map-canvas" aria-hidden="true">
+                <svg class="maps-streets" viewBox="0 0 600 560" fill="none" preserveAspectRatio="xMidYMid slice">
+                  <rect width="600" height="560" fill="var(--gray-100)" />
+                  <g fill="var(--gray-200)">
+                    <rect x="26" y="28" width="113" height="80" rx="8" /><rect x="164" y="28" width="101" height="80" rx="8" />
+                    <rect x="296" y="28" width="131" height="80" rx="8" /><rect x="456" y="28" width="120" height="80" rx="8" />
+                    <rect x="26" y="138" width="113" height="115" rx="8" /><rect x="164" y="138" width="101" height="115" rx="8" />
+                    <rect x="296" y="138" width="131" height="115" rx="8" /><rect x="456" y="138" width="120" height="115" rx="8" />
+                    <rect x="26" y="282" width="113" height="114" rx="8" /><rect x="164" y="282" width="101" height="114" rx="8" />
+                    <rect x="296" y="282" width="131" height="114" rx="8" /><rect x="456" y="282" width="120" height="114" rx="8" />
+                    <rect x="26" y="426" width="113" height="115" rx="8" /><rect x="164" y="426" width="101" height="115" rx="8" />
+                    <rect x="296" y="426" width="131" height="115" rx="8" /><rect x="456" y="426" width="120" height="115" rx="8" />
+                  </g>
+                  <path d="M-40 490 640 65" stroke="var(--gray-0)" stroke-width="42" />
+                  <path d="M-40 490 640 65" stroke="var(--gray-300)" stroke-width="2" stroke-dasharray="5 9" />
+                  <path d="M281 560V268H443V123" stroke="var(--red-300)" stroke-width="5" stroke-dasharray="8 7" class="maps-route" />
+                  <circle cx="281" cy="520" r="8" fill="var(--gray-700)" stroke="var(--gray-0)" stroke-width="4" />
+                </svg>
+                <span class="maps-neighborhood maps-n-one">{maps.mapa.bairros[0]}</span>
+                <span class="maps-neighborhood maps-n-two">{maps.mapa.bairros[1]}</span>
+                <span class="maps-neighborhood maps-n-three">{maps.mapa.bairros[2]}</span>
+                <div class="maps-pin-halo"></div>
+                <div class="maps-main-pin"><Icone nome="local" tamanho={48} /></div>
+                <span class="maps-small-pin maps-pin-one"><Icone nome="local" tamanho={22} /></span>
+                <span class="maps-small-pin maps-pin-two"><Icone nome="local" tamanho={22} /></span>
+              </div>
+              <div class="maps-profile-preview">
+                <div class="maps-profile-top"><div class="maps-business-symbol"><Icone nome="local" tamanho={26} /></div><div><strong>{maps.mapa.nome}</strong><p>{maps.mapa.categoria}</p></div><Icone nome="check" tamanho={20} /></div>
+                <div class="maps-profile-status"><span></span>{maps.mapa.status}</div>
+                <div class="maps-preview-actions">{maps.mapa.acoes.map((acao, i) => <span><Icone nome={['telefone', 'bussola', 'tela'][i]} tamanho={18} />{acao}</span>)}</div>
+              </div>
+              <div class="maps-opportunity"><Icone nome="conexao" tamanho={20} /><span>{maps.mapa.destaque}</span></div>
+            </div>
+            <p class="maps-illustration-caption">{maps.mapa.legenda}</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="maps-journey maps-section" id="como-funciona" aria-labelledby="journey-title">
+        <div class="maps-wrap">
+          <div class="maps-section-intro" data-maps-reveal><p class="maps-eyebrow">{maps.oportunidade.etiqueta}</p><h2 id="journey-title">{maps.oportunidade.titulo}</h2><p>{maps.oportunidade.texto}</p></div>
+          <ol class="maps-journey-steps">{maps.oportunidade.passos.map((passo, index) => (
+            <li class="maps-journey-step" data-maps-reveal>
+              <div class="maps-journey-step-heading">
+                <div class="maps-step-icon"><Icone nome={passo.icone} tamanho={40} /></div>
+                <div><span class="maps-step-index" aria-hidden="true">0{index + 1} / 03</span><h3>{passo.titulo}</h3></div>
+              </div>
+              <p>{passo.texto}</p>
+              {index < 2 && <span class="maps-journey-arrow" aria-hidden="true"><Icone nome="seta-direita" tamanho={24} /></span>}
+            </li>
+          ))}</ol>
+        </div>
+      </section>
+
+      <section class="maps-comparison maps-section" id="na-pratica" aria-labelledby="comparison-title">
+        <div class="maps-wrap maps-comparison-grid">
+          <div data-maps-reveal>
+            <p class="maps-eyebrow">{maps.comparacao.etiqueta}</p><h2 id="comparison-title">{maps.comparacao.titulo}</h2><p class="maps-section-copy">{maps.comparacao.texto}</p>
+            <div class="maps-tabs" role="group" aria-label="Comparar a apresentação de um perfil">
+              {maps.comparacao.estados.map((estado, index) => <button type="button" id={`toggle-${estado.id}`} data-profile-toggle={estado.id} aria-pressed={index === 1 ? 'true' : 'false'} aria-controls={`perfil-${estado.id}`}>{estado.rotulo}<Icone nome="seta-direita" tamanho={18} /></button>)}
+            </div>
+            <p class="maps-fineprint">{maps.comparacao.legenda}</p>
+          </div>
+          <div class="maps-demo-stage" data-maps-reveal>
+            <div class="maps-demo-frame" aria-live="polite" aria-atomic="true">
+              {maps.comparacao.estados.map((estado, index) => <div id={`perfil-${estado.id}`} class:list={['maps-demo-profile', index === 1 && 'maps-demo-optimized']} data-profile-panel={estado.id} hidden={index !== 1} role="region" aria-labelledby={`toggle-${estado.id}`}>
+                <div class="maps-demo-bar"><span class="maps-window-dots"><i></i><i></i><i></i></span><span>{estado.rotulo}</span><Icone nome="local" tamanho={16} /></div>
+                <div class="maps-demo-photo"><svg viewBox="0 0 400 120" fill="none" aria-hidden="true"><path d="M0 110h400M50 110V50h100v60M170 110V20h160v90M190 42h120M190 63h120M205 110V84h38v26M265 110V84h42v26M75 110V72h50v38" stroke="currentColor" stroke-width="2" /><path d="M30 50h140M153 20h195M38 50l22-30h80l20 30" stroke="currentColor" stroke-width="2" /></svg><span>{estado.foto}</span></div>
+                <div class="maps-demo-body"><span class="maps-demo-label">{estado.subtitulo}</span><h3>{estado.nome}</h3><p>{estado.categoria}</p><ul>{estado.itens.map(item => <li><Icone nome={estado.icone} tamanho={18} />{item}</li>)}</ul><div class="maps-demo-result"><Icone nome={estado.icone} tamanho={22} /><strong>{estado.resultado}</strong></div></div>
+              </div>)}
+            </div>
+            <span class="maps-stage-orbit" aria-hidden="true"></span>
+          </div>
+        </div>
+      </section>
+
+      <section class="maps-deliverables maps-section superficie-escura" id="solucao" aria-labelledby="solution-title">
+        <div class="maps-wrap"><div class="maps-section-intro" data-maps-reveal><p class="maps-eyebrow">{maps.entregas.etiqueta}</p><h2 id="solution-title">{maps.entregas.titulo}</h2><p>{maps.entregas.texto}</p></div>
+          <div class="maps-deliverable-grid">{maps.entregas.itens.map(item => <article class="maps-deliverable" data-maps-reveal><div><Icone nome={item.icone} tamanho={28} /><span>{item.numero}</span></div><h3>{item.titulo}</h3><p>{item.texto}</p></article>)}</div>
+          <p class="maps-ownership"><Icone nome="check" tamanho={20} />{maps.entregas.nota}</p>
+        </div>
+      </section>
+
+      <section class="maps-process maps-section" id="nosso-processo" aria-labelledby="process-title">
+        <div class="maps-wrap" data-process-carousel role="region" aria-roledescription="carrossel" aria-label="Etapas do trabalho">
+          <div class="maps-process-intro"><p class="maps-eyebrow">{maps.processo.etiqueta}</p><h2 id="process-title">{maps.processo.titulo}</h2><p>{maps.processo.apoio}</p></div>
+          <div class="maps-process-stage">
+            <div class="maps-process-orbits" aria-hidden="true"><i></i><i></i><i></i></div>
+            <ol class="maps-process-deck">
+              {maps.processo.passos.map((passo, index) => (
+                <li class="maps-process-card" data-process-card data-position={index === 0 ? 'active' : index === 1 ? 'next' : index === 2 ? 'back' : 'previous'}>
+                  <div class="maps-process-card-inner">
+                    <div class="maps-process-card-top"><span>{maps.processo.etapa} {passo.numero}</span><span aria-hidden="true">/ 04</span></div>
+                    <div class="maps-process-symbol"><Icone nome={maps.processo.icones[index]} tamanho={48} /><span aria-hidden="true">{passo.numero}</span></div>
+                    <h3>{passo.titulo}</h3><p>{passo.texto}</p>
+                    <div class="maps-process-card-track" aria-hidden="true">{maps.processo.passos.map((_, step) => <i class:list={[step === index && 'is-current']}></i>)}</div>
+                  </div>
+                </li>
+              ))}
+            </ol>
+          </div>
+          <div class="maps-process-controls" hidden>
+            <button type="button" class="maps-process-arrow maps-process-prev" data-process-prev aria-label={maps.processo.anterior}><Icone nome="seta-direita" tamanho={22} /></button>
+            <div class="maps-process-pagination" role="group" aria-label="Escolher etapa">{maps.processo.passos.map((passo, index) => <button type="button" data-process-go={index} aria-label={`${maps.processo.etapa} ${passo.numero}: ${passo.titulo}`} aria-pressed={index === 0 ? 'true' : 'false'}>{passo.numero}</button>)}</div>
+            <button type="button" class="maps-process-arrow" data-process-next aria-label={maps.processo.proxima}><Icone nome="seta-direita" tamanho={22} /></button>
+            <button type="button" class="maps-process-play" data-process-play aria-label={maps.processo.pausar}><span data-process-play-icon aria-hidden="true">Ⅱ</span></button>
+          </div>
+          <p class="sr-only" data-process-announcement aria-live="polite" aria-atomic="true"></p>
+        </div>
+      </section>
+
+      <section class="maps-diagnostic maps-section" id="conversar" aria-labelledby="diagnostic-title">
+        <div class="maps-wrap maps-diagnostic-grid"><div data-maps-reveal><p class="maps-eyebrow">{maps.diagnostico.etiqueta}</p><h2 id="diagnostic-title">{maps.diagnostico.titulo}</h2><p class="maps-section-copy">{maps.diagnostico.texto}</p><ul class="maps-diagnostic-checks">{maps.diagnostico.detalhes.map(item => <li><Icone nome="check" tamanho={20} />{item}</li>)}</ul><p class="maps-fineprint">{maps.diagnostico.qualifica}</p></div>
+          <form class="maps-form" id="maps-lead-form" action={`https://wa.me/${contato.whatsappNumero}`} method="get" target="_blank">
+            <input type="hidden" name="text" value={maps.mensagem} />
+            <label for="maps-empresa">{maps.diagnostico.empresa}</label><input id="maps-empresa" maxlength="120" autocomplete="organization" placeholder={maps.diagnostico.empresaPlaceholder} required />
+            <label for="maps-cidade">{maps.diagnostico.cidade}</label><input id="maps-cidade" maxlength="120" autocomplete="address-level2" placeholder={maps.diagnostico.cidadePlaceholder} required />
+            <label for="maps-situacao">{maps.diagnostico.situacao}</label><select id="maps-situacao">{maps.diagnostico.opcoes.map(opcao => <option>{opcao}</option>)}</select>
+            <button type="submit" class="maps-cta"><Icone nome="whatsapp" tamanho={22} /><span>{maps.diagnostico.botao}</span><Icone nome="seta-direita" tamanho={20} /></button>
+            <p class="maps-form-note">{maps.diagnostico.apoio}</p>
+            <a class="maps-direct-link" href={mapsWhatsapp} data-contact-location="maps_form_direct" target="_blank" rel="noopener noreferrer">{maps.diagnostico.alternativa}</a>
+          </form>
+        </div>
+      </section>
+
+      <section class="maps-faq maps-section" aria-labelledby="faq-title"><div class="maps-wrap maps-faq-grid"><div><p class="maps-eyebrow">{maps.faqEtiqueta}</p><h2 id="faq-title">{maps.faqTitulo}</h2></div><div>{mapsFaq.map(item => <details><summary>{item.pergunta}<span aria-hidden="true">+</span></summary><p>{item.resposta}</p></details>)}</div></div></section>
+    </main>
+
+    <footer class="maps-footer"><div class="maps-wrap"><div class="maps-footer-top"><a href={inicio} aria-label={maps.voltar}><Logo formato="completa" largura={144} /></a><a href={mapsWhatsapp} data-contact-location="maps_footer" target="_blank" rel="noopener noreferrer"><Icone nome="whatsapp" tamanho={20} />{contato.whatsappExibicao}</a></div><div class="maps-footer-bottom"><p>© {new Date().getFullYear()} {maps.rodape}</p>{ambiente.ga && <button type="button" data-abrir-consentimento>{maps.cookies}</button>}</div><p class="maps-disclaimer">{maps.independencia}</p></div></footer>
+
+    <a class="maps-mobile-contact" href={mapsWhatsapp} data-contact-location="maps_mobile" target="_blank" rel="noopener noreferrer" aria-label={`${maps.navegacao[2]} pelo WhatsApp`}><Icone nome="whatsapp" tamanho={22} /><span>{maps.navegacao[2]}</span><Icone nome="seta-direita" tamanho={18} /></a>
+  </div>
+
+  <script>
+    import { maps } from '../data/google-maps';
+    import { rastrear } from '../scripts/analytics';
+    const toggles = document.querySelectorAll<HTMLButtonElement>('[data-profile-toggle]');
+    const panels = document.querySelectorAll<HTMLElement>('[data-profile-panel]');
+    toggles.forEach(button => button.addEventListener('click', () => {
+      toggles.forEach(toggle => toggle.setAttribute('aria-pressed', String(toggle === button)));
+      panels.forEach(panel => { panel.hidden = panel.dataset.profilePanel !== button.dataset.profileToggle; });
+    }));
+
+    const form = document.querySelector<HTMLFormElement>('#maps-lead-form');
+    form?.addEventListener('submit', event => {
+      const company = document.querySelector<HTMLInputElement>('#maps-empresa')!;
+      const city = document.querySelector<HTMLInputElement>('#maps-cidade')!;
+      for (const input of [company, city]) {
+        input.setCustomValidity(input.value.trim() ? '' : 'Preencha este campo para continuar.');
+        if (!input.reportValidity()) { event.preventDefault(); return; }
+      }
+      const status = document.querySelector<HTMLSelectElement>('#maps-situacao')!.value;
+      const message = `${maps.mensagem}\n\nEmpresa: ${company.value.trim()}\nCidade/UF: ${city.value.trim()}\nSituação: ${status}`;
+      form.querySelector<HTMLInputElement>('[name="text"]')!.value = message;
+      rastrear('clique_whatsapp', { secao: 'maps_formulario', pagina: 'google-maps' });
+      // GET nativo abre o WhatsApp sem pop-up assíncrono e sem armazenar os dados.
+    });
+    form?.querySelectorAll('input').forEach(input => input.addEventListener('input', () => input.setCustomValidity('')));
+
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const carousel = document.querySelector<HTMLElement>('[data-process-carousel]');
+    if (carousel) {
+      const cards = [...carousel.querySelectorAll<HTMLElement>('[data-process-card]')];
+      const choices = [...carousel.querySelectorAll<HTMLButtonElement>('[data-process-go]')];
+      const play = carousel.querySelector<HTMLButtonElement>('[data-process-play]')!;
+      const stage = carousel.querySelector<HTMLElement>('.maps-process-stage')!;
+      const announcement = carousel.querySelector<HTMLElement>('[data-process-announcement]')!;
+      let current = 0;
+      let paused = reducedMotion;
+      let visible = false;
+      let hovering = false;
+      let timer: ReturnType<typeof setInterval> | undefined;
+      const render = (announce = false) => {
+        cards.forEach((card, index) => {
+          const offset = (index - current + cards.length) % cards.length;
+          card.dataset.position = ['active', 'next', 'back', 'previous'][offset];
+          card.setAttribute('aria-hidden', String(offset !== 0));
+          card.inert = offset !== 0;
+        });
+        choices.forEach((choice, index) => choice.setAttribute('aria-pressed', String(index === current)));
+        if (announce) announcement.textContent = `${maps.processo.etapa} ${maps.processo.passos[current].numero}: ${maps.processo.passos[current].titulo}`;
+      };
+      const move = (destination: number, manual = false) => {
+        current = (destination + cards.length) % cards.length;
+        render(manual);
+        if (manual) { paused = true; syncTimer(); }
+      };
+      function syncTimer() {
+        clearInterval(timer);
+        const stopped = paused || hovering || !visible || document.hidden || carousel!.contains(document.activeElement);
+        carousel!.dataset.paused = String(stopped);
+        play.setAttribute('aria-label', paused ? maps.processo.reproduzir : maps.processo.pausar);
+        play.querySelector<HTMLElement>('[data-process-play-icon]')!.textContent = paused ? '▷' : 'Ⅱ';
+        if (!stopped) timer = setInterval(() => move(current + 1), 7000);
+      }
+      carousel.dataset.enhanced = 'true';
+      carousel.querySelector<HTMLElement>('.maps-process-controls')!.hidden = false;
+      render();
+      choices.forEach((choice, index) => choice.addEventListener('click', () => move(index, true)));
+      carousel.querySelector('[data-process-prev]')!.addEventListener('click', () => move(current - 1, true));
+      carousel.querySelector('[data-process-next]')!.addEventListener('click', () => move(current + 1, true));
+      play.addEventListener('click', () => { paused = !paused; syncTimer(); });
+      carousel.addEventListener('mouseenter', () => { hovering = true; syncTimer(); });
+      carousel.addEventListener('mouseleave', () => { hovering = false; syncTimer(); });
+      carousel.addEventListener('focusin', syncTimer);
+      carousel.addEventListener('focusout', () => queueMicrotask(syncTimer));
+      document.addEventListener('visibilitychange', syncTimer);
+      carousel.addEventListener('keydown', event => {
+        if (event.key !== 'ArrowLeft' && event.key !== 'ArrowRight') return;
+        event.preventDefault();
+        move(current + (event.key === 'ArrowRight' ? 1 : -1), true);
+      });
+      let startX = 0;
+      let startY = 0;
+      stage.addEventListener('touchstart', event => { startX = event.changedTouches[0].clientX; startY = event.changedTouches[0].clientY; }, { passive: true });
+      stage.addEventListener('touchend', event => {
+        const dx = event.changedTouches[0].clientX - startX;
+        const dy = event.changedTouches[0].clientY - startY;
+        if (Math.abs(dx) > 45 && Math.abs(dx) > Math.abs(dy)) move(current + (dx < 0 ? 1 : -1), true);
+      }, { passive: true });
+      if ('IntersectionObserver' in window) {
+        const observer = new IntersectionObserver(entries => { visible = entries[0].isIntersecting; syncTimer(); }, { threshold: 0.3 });
+        observer.observe(stage);
+      }
+      syncTimer();
+    }
+    if (!reducedMotion && 'IntersectionObserver' in window) {
+      const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if (!entry.isIntersecting) return;
+          entry.target.classList.add('maps-visible');
+          observer.unobserve(entry.target);
+        });
+      }, { threshold: 0.08 });
+      document.querySelectorAll<HTMLElement>('[data-maps-reveal]').forEach(element => {
+        element.classList.add('maps-will-reveal');
+        observer.observe(element);
+      });
+    }
+
+    // O CTA fixo só aparece depois do hero e se o formulário não estiver visível.
+    const mobileContact = document.querySelector<HTMLElement>('.maps-mobile-contact');
+    if ('IntersectionObserver' in window && mobileContact) {
+      let heroVisible = true;
+      let formVisible = false;
+      const updateContact = () => mobileContact.classList.toggle('maps-contact-visible', !heroVisible && !formVisible);
+      const contactObserver = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if (entry.target.classList.contains('maps-hero')) heroVisible = entry.isIntersecting;
+          else formVisible = entry.isIntersecting;
+        });
+        updateContact();
+      });
+      const hero = document.querySelector('.maps-hero');
+      if (hero) contactObserver.observe(hero);
+      if (form) contactObserver.observe(form);
+    }
+  </script>
+</Base>
